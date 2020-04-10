@@ -15,8 +15,10 @@ int getHash(Transport transport)
 	{
 		sum += transport.count;
 	}
-
-
+	else if (transport.type == SHIP)
+	{
+		sum += transport.displacement;
+	}
 
 	return sum % MAXHASH;
 }
@@ -25,7 +27,7 @@ bool readFile(string input, vector<Transport> hasharray[])
 {
 
 	int count = 0;
-	// передать поток сразу
+
 	ifstream infile(input);
 	if (!infile.is_open())
 	{
@@ -57,10 +59,18 @@ bool readFile(string input, vector<Transport> hasharray[])
 			getline(infile, line);
 			tempTransport->capacity = atoi(line.c_str());
 		}
-		else
+		else if (tempTransport->type == TRAIN)
 		{
 			getline(infile, line);
 			tempTransport->count = atoi(line.c_str());
+		}
+		else if (tempTransport->type == SHIP)
+		{
+			getline(infile, line);
+			tempTransport->displacement = atoi(line.c_str());
+
+			getline(infile, line);
+			tempTransport->shipType = static_cast<ShipType>(atoi(line.c_str()));
 		}
 
 		int index = getHash(*tempTransport);
@@ -95,6 +105,12 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 				outfile << "Type of transport: TRAIN\n";
 				outfile << "Count of train car is " << current.count << endl;
 			}
+			else if (current.type == SHIP)
+			{
+				outfile << "Type of transport: SHIP\n";
+				outfile << "Displacement is " << current.displacement << endl;
+				outfile << "Type of ship is " << shipTypeToString(current.shipType) << endl;
+			}
 			outfile << "Distance is  " << current.length << endl;
 			outfile << "Max speed is  " << current.speed << endl;
 			outfile << endl;
@@ -107,4 +123,24 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 
 	outfile.close();
 	return true;
+}
+
+string shipTypeToString(ShipType value)
+{
+	string result = "";
+	switch (value)
+	{
+	case LINER:
+		result = "LINER";
+		break;
+	case TOW:
+		result = "TOW";
+		break;
+	case TANKER:
+		result = "TANKER";
+		break;
+	default:
+		break;
+	}
+	return result;
 }

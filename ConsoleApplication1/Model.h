@@ -10,7 +10,15 @@ const int MAXHASH = 32;
 enum TransportEnum
 {
 	PLANE = 0,
-	TRAIN = 1
+	TRAIN = 1,
+	SHIP = 2
+};
+
+enum ShipType
+{
+	LINER,
+	TOW,
+	TANKER,
 };
 
 struct Transport
@@ -27,6 +35,9 @@ struct Transport
 	//Train
 	int count;
 
+	//Ship
+	int displacement;
+	ShipType shipType;
 
 };
 
@@ -34,4 +45,6 @@ int getHash(Transport transport);
 
 bool readFile(string input, vector<Transport> hasharray[]);
 bool writeToFile(string output, vector<Transport> hasharray[]);
+
+string shipTypeToString(ShipType value);
 
