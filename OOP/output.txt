@@ -1,0 +1,6 @@
+Type of transport: PLANE
+Max capacity is 4
+Max range is 3
+Distance is  2
+Max speed is  1
+

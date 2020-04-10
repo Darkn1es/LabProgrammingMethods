@@ -1,0 +1,12 @@
+Type of transport: PLANE
+Max capacity is 4
+Max range is 3
+Distance is  2
+Max speed is  1
+
+Type of transport: TRAIN
+Count of train car is 7
+Distance is  6
+Max speed is  5
+
+There are 2 transports
