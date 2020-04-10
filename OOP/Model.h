@@ -56,6 +56,13 @@ public:
 	void WriteTransportToFile(ofstream& out) override;
 };
 
+class Ship : public Transport
+{
+private:
+	int _displacement;
+
+};
+
 
 class HashArray
 {
