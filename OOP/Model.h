@@ -58,9 +58,27 @@ public:
 
 class Ship : public Transport
 {
+public:
+	enum ShipType
+	{
+		LINER,
+		TOW,
+		TANKER,
+	};
+
+	int GetDisplacement();
+	void SetDisplacement(int value);
+
+	ShipType GetShipType();
+	void SetShipType(ShipType value);
+
+	void ReadTransportFromFile(ifstream& in) override;
+	void WriteTransportToFile(ofstream& out) override;
+
 private:
 	int _displacement;
-
+	ShipType _shipType;
+	string shipTypeToString(ShipType value);
 };
 
 

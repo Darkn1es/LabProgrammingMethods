@@ -136,6 +136,11 @@ int HashArray::getHash(Transport* transport)
 		Train* train = (Train*)transport;
 		sum += train->GetCount();
 	}
+	else if (typeid(*transport) == typeid(Ship))
+	{
+		Ship* ship = (Ship*)transport;
+		sum += ship->GetDisplacement();
+	}
 	return sum % MAXHASH;
 }
 
@@ -165,6 +170,12 @@ bool HashArray::ReadFile(ifstream& in)
 			Train* tempTrain = new Train();
 			tempTrain->ReadTransportFromFile(in);
 			tempTrasport = tempTrain;
+		}
+		else if (type == 2)
+		{
+			Ship* tempShip = new Ship();
+			tempShip->ReadTransportFromFile(in);
+			tempTrasport = tempShip;
 		}
 		else
 		{
@@ -217,6 +228,73 @@ HashArray::~HashArray()
 	}
 	delete Conteiner;
 	
+}
+
+#pragma endregion
+
+#pragma region Ship
+
+int Ship::GetDisplacement()
+{
+	return _displacement;
+}
+
+void Ship::SetDisplacement(int value)
+{
+	_displacement = value;
+}
+
+Ship::ShipType Ship::GetShipType()
+{
+	return _shipType;
+}
+
+void Ship::SetShipType(ShipType value)
+{
+	_shipType = value;
+}
+
+void Ship::ReadTransportFromFile(ifstream& in)
+{
+	Transport::ReadTransportFromFile(in);
+
+	string line;
+
+	getline(in, line);
+	_displacement = atoi(line.c_str());
+
+	getline(in, line);
+	_shipType = static_cast<ShipType>(atoi(line.c_str()));
+
+}
+
+void Ship::WriteTransportToFile(ofstream& out)
+{
+	out << "Type of transport: SHIP\n";
+	out << "Displacement is " << _displacement << endl;
+	out << "Type of ship is " << shipTypeToString(_shipType) << endl;
+
+	Transport::WriteTransportToFile(out);
+}
+
+string Ship::shipTypeToString(ShipType value)
+{
+	string result = "";
+	switch (value)
+	{
+	case Ship::LINER:
+		result = "LINER";
+		break;
+	case Ship::TOW:
+		result = "TOW";
+		break;
+	case Ship::TANKER:
+		result = "TANKER";
+		break;
+	default:
+		break;
+	}
+	return result;
 }
 
 #pragma endregion
