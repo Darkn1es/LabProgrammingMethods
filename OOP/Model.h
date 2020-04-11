@@ -26,6 +26,7 @@ public:
 	int GetLength();
 	void SetLength(int value);
 
+	double GetTravelTime();
 	
 };
 

@@ -17,6 +17,7 @@ void Transport::WriteTransportToFile(ofstream& out)
 {
 	out << "Distance is  " << _length << endl;
 	out << "Max speed is  " << _speed << endl;
+	out << "Travel time is " << GetTravelTime() << endl;
 	out << endl;
 }
 
@@ -38,6 +39,11 @@ int Transport::GetLength()
 void Transport::SetLength(int value)
 {
 	_length = value;
+}
+
+double Transport::GetTravelTime()
+{
+	return static_cast<double>(_length) / static_cast<double>(_speed);
 }
 
 #pragma endregion
