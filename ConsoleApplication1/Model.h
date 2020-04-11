@@ -19,6 +19,7 @@ struct Transport
 
 	int speed;
 	int length;
+	double cargoWeight;
 
 	//Plane
 	int range;

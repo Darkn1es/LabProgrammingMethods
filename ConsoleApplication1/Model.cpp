@@ -49,6 +49,9 @@ bool readFile(string input, vector<Transport> hasharray[])
 		getline(infile, line);
 		tempTransport->length = atoi(line.c_str());
 
+		getline(infile, line);
+		tempTransport->cargoWeight = atof(line.c_str());
+
 		if (tempTransport->type == PLANE)
 		{
 			getline(infile, line);
@@ -97,6 +100,8 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 			}
 			outfile << "Distance is  " << current.length << endl;
 			outfile << "Max speed is  " << current.speed << endl;
+			outfile << "Cargo weight is  " << current.cargoWeight << endl;
+
 			outfile << endl;
 		}
 		count += (int)hasharray[i].size();

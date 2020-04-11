@@ -1,5 +1,5 @@
 ﻿#include "Model.h"
-#define DEBUG 1;
+#define DEBUG false;
 
 using std::cout;
 
