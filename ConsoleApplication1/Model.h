@@ -31,6 +31,7 @@ struct Transport
 };
 
 int getHash(Transport transport);
+double getTravelTime(Transport transport);
 
 bool readFile(string input, vector<Transport> hasharray[]);
 bool writeToFile(string output, vector<Transport> hasharray[]);

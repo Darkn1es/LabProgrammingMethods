@@ -21,6 +21,11 @@ int getHash(Transport transport)
 	return sum % MAXHASH;
 }
 
+double getTravelTime(Transport transport)
+{
+	return static_cast<double>(transport.length) / static_cast<double>(transport.speed);
+}
+
 bool readFile(string input, vector<Transport> hasharray[])
 {
 
@@ -97,6 +102,7 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 			}
 			outfile << "Distance is  " << current.length << endl;
 			outfile << "Max speed is  " << current.speed << endl;
+			outfile << "Travel time is " << getTravelTime(current) << endl;
 			outfile << endl;
 		}
 		count += (int)hasharray[i].size();
