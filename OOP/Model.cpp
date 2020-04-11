@@ -11,12 +11,16 @@ void Transport::ReadTransportFromFile(ifstream& in)
 
 	getline(in, line);
 	_length = atoi(line.c_str());
+
+	getline(in, line);
+	_cargoWeight = atof(line.c_str());
 }
 
 void Transport::WriteTransportToFile(ofstream& out)
 {
 	out << "Distance is  " << _length << endl;
 	out << "Max speed is  " << _speed << endl;
+	out << "Cargo weight is  " << _cargoWeight << endl;
 	out << endl;
 }
 
@@ -38,6 +42,16 @@ int Transport::GetLength()
 void Transport::SetLength(int value)
 {
 	_length = value;
+}
+
+double Transport::GetCargoWeight()
+{
+	return _cargoWeight;
+}
+
+void Transport::SetCargoWeight(double value)
+{
+	_cargoWeight = value;
 }
 
 #pragma endregion
