@@ -199,6 +199,31 @@ bool HashArray::WriteFile(ofstream& out)
 	return false;
 }
 
+bool HashArray::WriteFile(ofstream& out, const type_info& missingType)
+{
+	int count = 0;
+
+	for (int i = 0; i < MAXHASH; i++)
+	{
+		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		{
+			Transport* current = Conteiner[i][j];
+			// Skip chosen type
+			if (missingType == typeid(*current))
+			{
+				count--;
+				continue;
+			}
+			current->WriteTransportToFile(out);
+		}
+		count += (int)Conteiner[i].size();
+	}
+
+	out << "There are " << count << " transports" << endl;
+
+	return false;
+}
+
 
 HashArray::HashArray()
 {

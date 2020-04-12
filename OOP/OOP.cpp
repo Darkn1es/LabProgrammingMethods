@@ -33,8 +33,8 @@ int main(int argc, char* argv[])
 	HashArray* hashArray = new HashArray();
 
 	hashArray->ReadFile(infile);
-	hashArray->WriteFile(outfile);
-
+	//hashArray->WriteFile(outfile);
+	hashArray->WriteFile(outfile, typeid(Train));
 
 	return 0;
 }
