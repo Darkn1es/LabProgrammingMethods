@@ -17,7 +17,6 @@ int getHash(Transport transport)
 	}
 
 
-
 	return sum % MAXHASH;
 }
 
@@ -113,4 +112,31 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 
 	outfile.close();
 	return true;
+}
+
+bool compare(Transport& a, Transport& b)
+{
+	return getTravelTime(a) > getTravelTime(b);
+}
+
+void sort(vector<Transport> array[])
+{
+	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
+	{
+		// Bubble sort
+		int size = array[hashIndex].size();
+		for (int i = 0; i < (size - 1); i++)
+		{
+			for (int j = 0; j < (size - i - 1); j++)
+			{
+				if (compare(array[hashIndex][j], array[hashIndex][j + 1]))
+				{
+					Transport temp = array[hashIndex][j];
+					array[hashIndex][j] = array[hashIndex][j + 1];
+					array[hashIndex][j + 1] = temp;
+				}
+			}
+		}
+
+	}
 }

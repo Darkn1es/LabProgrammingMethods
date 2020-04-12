@@ -36,3 +36,6 @@ double getTravelTime(Transport transport);
 bool readFile(string input, vector<Transport> hasharray[]);
 bool writeToFile(string output, vector<Transport> hasharray[]);
 
+bool compare(Transport& a, Transport& b);
+void sort(vector<Transport> array[]);
+

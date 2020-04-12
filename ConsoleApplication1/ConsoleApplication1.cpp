@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
 		cout << "Bad input file!\n";
 		return 1;
 	}
+	sort(hasharray);
 	result = writeToFile(outputPath, hasharray);
 	if (!result)
 	{
