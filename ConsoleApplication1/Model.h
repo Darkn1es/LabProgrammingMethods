@@ -34,4 +34,6 @@ int getHash(Transport transport);
 
 bool readFile(string input, vector<Transport> hasharray[]);
 bool writeToFile(string output, vector<Transport> hasharray[]);
+bool writeToFile(string output, vector<Transport> hasharray[], int missingType);
+
 

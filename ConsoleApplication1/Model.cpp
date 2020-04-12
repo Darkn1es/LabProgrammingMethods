@@ -108,3 +108,47 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 	outfile.close();
 	return true;
 }
+
+bool writeToFile(string output, vector<Transport> hasharray[], int missingType)
+{
+	ofstream outfile(output);
+	if (!outfile.is_open())
+	{
+		return false;
+	}
+	int count = 0;
+
+	for (int i = 0; i < MAXHASH; i++)
+	{
+		for (int j = 0; j < (int)hasharray[i].size(); j++)
+		{
+			Transport current = hasharray[i][j];
+			if (current.type == missingType)
+			{
+				count--;
+				continue;
+			}
+			if (current.type == PLANE)
+			{
+				outfile << "Type of transport: PLANE\n";
+				outfile << "Max capacity is " << current.capacity << endl;
+				outfile << "Max range is " << current.range << endl;
+			}
+			else if (current.type == TRAIN)
+			{
+				outfile << "Type of transport: TRAIN\n";
+				outfile << "Count of train car is " << current.count << endl;
+			}
+			outfile << "Distance is  " << current.length << endl;
+			outfile << "Max speed is  " << current.speed << endl;
+			outfile << endl;
+		}
+		count += (int)hasharray[i].size();
+	}
+
+	outfile << "There are " << count << " transports" << endl;
+
+
+	outfile.close();
+	return true;
+}
