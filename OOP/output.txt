@@ -1,11 +1,4 @@
 Type of transport: PLANE
-Max capacity is 9
-Max range is 8
-Distance is  7
-Max speed is  10
-Travel time is 0.7
-
-Type of transport: PLANE
 Max capacity is 4
 Max range is 3
 Distance is  2
@@ -17,5 +10,12 @@ Count of train car is 7
 Distance is  6
 Max speed is  5
 Travel time is 1.2
+
+Type of transport: PLANE
+Max capacity is 9
+Max range is 8
+Distance is  7
+Max speed is  10
+Travel time is 0.7
 
 There are 3 transports

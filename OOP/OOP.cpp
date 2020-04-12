@@ -1,5 +1,5 @@
 ﻿#include "Model.h"
-#define DEBUG false;
+#define DEBUG 1;
 
 using std::cout;
 
@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
 	HashArray* hashArray = new HashArray();
 
 	hashArray->ReadFile(infile);
+	hashArray->Sort();
 	hashArray->WriteFile(outfile);
 
 
