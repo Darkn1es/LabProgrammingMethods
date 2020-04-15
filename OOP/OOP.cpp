@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
 	hashArray->Sort();
 	hashArray->WriteFile(outfile);
 
+	//hashArray->WriteFile(outfile, typeid(Train));
 
 	return 0;
 }

@@ -236,17 +236,42 @@ bool HashArray::WriteFile(ofstream& out)
 	return false;
 }
 
+bool HashArray::WriteFile(ofstream& out, const type_info& missingType)
+{
+	int count = 0;
+
+	for (int i = 0; i < MAXHASH; i++)
+	{
+		for (int j = 0; j < (int)Conteiner[i].size(); j++)
+		{
+			Transport* current = Conteiner[i][j];
+			// Skip chosen type
+			if (missingType == typeid(*current))
+			{
+				count--;
+				continue;
+			}
+			current->WriteTransportToFile(out);
+		}
+		count += (int)Conteiner[i].size();
+	}
+
+	out << "There are " << count << " transports" << endl;
+
+	return false;
+}
+
 void HashArray::Sort()
 {
 	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
 	{
 		// Bubble sort
 		int size = Conteiner[hashIndex].size();
-		for (int i = 0; i < (size - 1); i++) 
+		for (int i = 0; i < (size - 1); i++)
 		{
-			for (int j = 0; j < (size - i - 1); j++) 
+			for (int j = 0; j < (size - i - 1); j++)
 			{
-				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1])) 
+				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1]))
 				{
 					Transport* temp = Conteiner[hashIndex][j];
 					Conteiner[hashIndex][j] = Conteiner[hashIndex][j + 1];
@@ -254,9 +279,10 @@ void HashArray::Sort()
 				}
 			}
 		}
-		
+
 	}
 }
+
 
 
 HashArray::HashArray()

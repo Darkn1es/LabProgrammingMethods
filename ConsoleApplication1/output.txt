@@ -1,24 +1,47 @@
-Type of transport: PLANE
-Max capacity is 9
-Max range is 8
-Distance is  7
-Max speed is  10
-Cargo weight is  3.14
-Travel time is 0.7
-
-Type of transport: PLANE
-Max capacity is 4
-Max range is 3
-Distance is  2
-Max speed is  1
-Cargo weight is  2.421
-Travel time is 2
+Type of transport: SHIP
+Displacement is 6
+Type of ship is TOW
+Distance is  4
+Max speed is  8
+Cargo weight is  8.58
+Travel time is 0.5
 
 Type of transport: TRAIN
-Count of train car is 7
-Distance is  6
-Max speed is  5
-Cargo weight is  0.1234
-Travel time is 1.2
+Count of train car is 10
+Distance is  7
+Max speed is  8
+Cargo weight is  4.58
+Travel time is 0.875
 
-There are 3 transports
+Type of transport: TRAIN
+Count of train car is 12
+Distance is  5
+Max speed is  4
+Cargo weight is  65.8
+Travel time is 1.25
+
+Type of transport: PLANE
+Max capacity is 5
+Max range is 4
+Distance is  3
+Max speed is  2
+Cargo weight is  5.2
+Travel time is 1.5
+
+Type of transport: SHIP
+Displacement is 54
+Type of ship is LINER
+Distance is  3
+Max speed is  2
+Cargo weight is  1.25
+Travel time is 1.5
+
+Type of transport: PLANE
+Max capacity is 22
+Max range is 33
+Distance is  6
+Max speed is  3
+Cargo weight is  1.2
+Travel time is 2
+
+There are 6 transports

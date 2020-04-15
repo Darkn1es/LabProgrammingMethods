@@ -99,6 +99,7 @@ public:
 	const int MAXHASH = 32;
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
+	bool WriteFile(ofstream& out, const type_info& missingType);
 
 	void Sort();
 
