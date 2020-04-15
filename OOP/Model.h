@@ -17,6 +17,7 @@ class Transport
 private:
 	int _speed;
 	int _length;
+	double _cargoWeight;
 public:
 	virtual void ReadTransportFromFile(ifstream& in);
 	virtual void WriteTransportToFile(ofstream& out);
@@ -26,6 +27,8 @@ public:
 	int GetLength();
 	void SetLength(int value);
 
+	double GetCargoWeight();
+	void SetCargoWeight(double value);
 	
 };
 

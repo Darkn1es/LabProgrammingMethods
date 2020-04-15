@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	inputPath = argv[1];
 	outputPath = argv[2];
 #endif
-	
+
 	ifstream infile(inputPath);
 	if (!infile.is_open())
 	{
@@ -38,4 +38,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
