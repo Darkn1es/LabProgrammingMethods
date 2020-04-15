@@ -60,6 +60,11 @@ double Transport::GetTravelTime()
 	return static_cast<double>(_length) / static_cast<double>(_speed);
 }
 
+bool Transport::Compare(Transport* value)
+{
+	return this->GetTravelTime() > value->GetTravelTime();
+}
+
 #pragma endregion
 
 #pragma region Plane
@@ -161,6 +166,7 @@ int HashArray::getHash(Transport* transport)
 		Ship* ship = (Ship*)transport;
 		sum += ship->GetDisplacement();
 	}
+
 	return sum % MAXHASH;
 }
 
@@ -228,6 +234,28 @@ bool HashArray::WriteFile(ofstream& out)
 	out << "There are " << count << " transports" << endl;
 
 	return false;
+}
+
+void HashArray::Sort()
+{
+	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
+	{
+		// Bubble sort
+		int size = Conteiner[hashIndex].size();
+		for (int i = 0; i < (size - 1); i++) 
+		{
+			for (int j = 0; j < (size - i - 1); j++) 
+			{
+				if (Conteiner[hashIndex][j]->Compare(Conteiner[hashIndex][j + 1])) 
+				{
+					Transport* temp = Conteiner[hashIndex][j];
+					Conteiner[hashIndex][j] = Conteiner[hashIndex][j + 1];
+					Conteiner[hashIndex][j + 1] = temp;
+				}
+			}
+		}
+		
+	}
 }
 
 

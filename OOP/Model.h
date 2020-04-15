@@ -31,6 +31,8 @@ public:
 	void SetCargoWeight(double value);
 
 	double GetTravelTime();
+
+	bool Compare(Transport* value);
 	
 };
 
@@ -98,6 +100,7 @@ public:
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
 
+	void Sort();
 
 	HashArray();
 	~HashArray();

@@ -50,3 +50,7 @@ bool writeToFile(string output, vector<Transport> hasharray[]);
 
 string shipTypeToString(ShipType value);
 
+bool compare(Transport& a, Transport& b);
+void sort(vector<Transport> array[]);
+
+

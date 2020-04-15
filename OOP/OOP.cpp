@@ -33,6 +33,7 @@ int main(int argc, char* argv[])
 	HashArray* hashArray = new HashArray();
 
 	hashArray->ReadFile(infile);
+	hashArray->Sort();
 	hashArray->WriteFile(outfile);
 
 
