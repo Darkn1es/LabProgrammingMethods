@@ -4,6 +4,7 @@ Max range is 8
 Distance is  7
 Max speed is  10
 Cargo weight is  3.14
+Travel time is 0.7
 
 Type of transport: PLANE
 Max capacity is 4
@@ -11,11 +12,13 @@ Max range is 3
 Distance is  2
 Max speed is  1
 Cargo weight is  2.421
+Travel time is 2
 
 Type of transport: TRAIN
 Count of train car is 7
 Distance is  6
 Max speed is  5
 Cargo weight is  0.1234
+Travel time is 1.2
 
 There are 3 transports

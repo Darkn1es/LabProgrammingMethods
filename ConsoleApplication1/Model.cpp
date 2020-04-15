@@ -23,6 +23,11 @@ int getHash(Transport transport)
 	return sum % MAXHASH;
 }
 
+double getTravelTime(Transport transport)
+{
+	return static_cast<double>(transport.length) / static_cast<double>(transport.speed);
+}
+
 bool readFile(string input, vector<Transport> hasharray[])
 {
 
@@ -52,7 +57,7 @@ bool readFile(string input, vector<Transport> hasharray[])
 		tempTransport->length = atoi(line.c_str());
 
 		getline(infile, line);
-		tempTransport->cargoWeight = atof(line.c_str());
+		tempTransport->cargoWeight = atof(line.c_str()); 
 
 		if (tempTransport->type == PLANE)
 		{
@@ -118,6 +123,7 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 			outfile << "Max speed is  " << current.speed << endl;
 			outfile << "Cargo weight is  " << current.cargoWeight << endl;
 
+			outfile << "Travel time is " << getTravelTime(current) << endl;
 			outfile << endl;
 		}
 		count += (int)hasharray[i].size();

@@ -29,6 +29,8 @@ public:
 
 	double GetCargoWeight();
 	void SetCargoWeight(double value);
+
+	double GetTravelTime();
 	
 };
 
