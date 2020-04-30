@@ -1,0 +1,5 @@
+Distance is 3
+Max speed is 1
+Cargo weight is 2
+Travel time is 3
+

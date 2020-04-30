@@ -28,16 +28,10 @@ double getTravelTime(Transport transport)
 	return static_cast<double>(transport.length) / static_cast<double>(transport.speed);
 }
 
-bool readFile(string input, vector<Transport> hasharray[])
+bool readFile(ifstream& infile, vector<Transport> hasharray[])
 {
 
 	int count = 0;
-
-	ifstream infile(input);
-	if (!infile.is_open())
-	{
-		return false;
-	}
 
 	string line;
 	getline(infile, line);
@@ -86,15 +80,11 @@ bool readFile(string input, vector<Transport> hasharray[])
 		delete tempTransport;
 	}
 	infile.close();
+	return true;
 }
 
-bool writeToFile(string output, vector<Transport> hasharray[])
+bool writeToFile(ofstream& outfile, vector<Transport> hasharray[])
 {
-	ofstream outfile(output);
-	if (!outfile.is_open())
-	{
-		return false;
-	}
 	int count = 0;
 
 	for (int i = 0; i < MAXHASH; i++)
@@ -119,9 +109,9 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 				outfile << "Displacement is " << current.displacement << endl;
 				outfile << "Type of ship is " << shipTypeToString(current.shipType) << endl;
 			}
-			outfile << "Distance is  " << current.length << endl;
-			outfile << "Max speed is  " << current.speed << endl;
-			outfile << "Cargo weight is  " << current.cargoWeight << endl;
+			outfile << "Distance is " << current.length << endl;
+			outfile << "Max speed is " << current.speed << endl;
+			outfile << "Cargo weight is " << current.cargoWeight << endl;
 
 			outfile << "Travel time is " << getTravelTime(current) << endl;
 			outfile << endl;
@@ -136,13 +126,8 @@ bool writeToFile(string output, vector<Transport> hasharray[])
 	return true;
 }
 
-bool writeToFile(string output, vector<Transport> hasharray[], int missingType)
+bool writeToFile(ofstream& outfile, vector<Transport> hasharray[], int missingType)
 {
-	ofstream outfile(output);
-	if (!outfile.is_open())
-	{
-		return false;
-	}
 	int count = 0;
 
 	for (int i = 0; i < MAXHASH; i++)
@@ -166,8 +151,17 @@ bool writeToFile(string output, vector<Transport> hasharray[], int missingType)
 				outfile << "Type of transport: TRAIN\n";
 				outfile << "Count of train car is " << current.count << endl;
 			}
-			outfile << "Distance is  " << current.length << endl;
-			outfile << "Max speed is  " << current.speed << endl;
+			else if (current.type == SHIP)
+			{
+				outfile << "Type of transport: SHIP\n";
+				outfile << "Displacement is " << current.displacement << endl;
+				outfile << "Type of ship is " << shipTypeToString(current.shipType) << endl;
+			}
+			outfile << "Distance is " << current.length << endl;
+			outfile << "Max speed is " << current.speed << endl;
+			outfile << "Cargo weight is " << current.cargoWeight << endl;
+
+			outfile << "Travel time is " << getTravelTime(current) << endl;
 			outfile << endl;
 		}
 		count += (int)hasharray[i].size();

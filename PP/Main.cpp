@@ -27,25 +27,28 @@ int main(int argc, char* argv[])
 	outputPath = argv[2];
 
 #endif
-
-	vector<Transport> hasharray[MAXHASH];
-	bool result = readFile(inputPath, hasharray);
-	if (!result)
+	ifstream infile(inputPath);
+	if (!infile.is_open())
 	{
-		cout << "Bad input file!\n";
 		return 1;
 	}
+
+	ofstream outfile(outputPath);
+	if (!outfile.is_open())
+	{
+		return 1;
+	}
+
+	vector<Transport> hasharray[MAXHASH];
+
+	readFile(infile, hasharray);
+
 
 	sort(hasharray);
 
-	result = writeToFile(outputPath, hasharray);
+	writeToFile(outfile, hasharray);
 
 	//result = writeToFile(outputPath, hasharray, TRAIN);
-	if (!result)
-	{
-		cout << "Bad output file!\n";
-		return 1;
-	}
 
 	return 0;
 }

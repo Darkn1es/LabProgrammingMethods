@@ -249,8 +249,9 @@ namespace TransportUnitTests
 			HashArray* arr = new HashArray();
 			arr->ReadFile(infile);
 			infile.close();
-			Assert::IsTrue(arr->Conteiner[14][0]->GetTravelTime() == 3, L"Assert 1");
-			Assert::IsTrue(arr->Conteiner[14][1]->GetTravelTime() == 2, L"Assert 2");
+			arr->Sort();
+			Assert::IsTrue(arr->Conteiner[14][0]->GetTravelTime() == 2, L"Assert 1");
+			Assert::IsTrue(arr->Conteiner[14][1]->GetTravelTime() == 3, L"Assert 2");
 
 		}
 
