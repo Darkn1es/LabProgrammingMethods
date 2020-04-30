@@ -14,13 +14,13 @@ void Transport::ReadTransportFromFile(ifstream& in)
 
 	getline(in, line);
 	_cargoWeight = atof(line.c_str());
-}
+}	
 
-void Transport::WriteTransportToFile(ofstream& out)
+void Transport::WriteTransportToFile(std::ofstream& out)
 {
-	out << "Distance is  " << _length << endl;
-	out << "Max speed is  " << _speed << endl;
-	out << "Cargo weight is  " << _cargoWeight << endl;
+	out << "Distance is " << _length << endl;
+	out << "Max speed is " << _speed << endl;
+	out << "Cargo weight is " << _cargoWeight << endl;
 	out << "Travel time is " << GetTravelTime() << endl;
 	out << endl;
 }
