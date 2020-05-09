@@ -263,14 +263,6 @@ bool HashArray::ReadFile(ifstream& in)
 		Transport* tempTrasport = nullptr;
 
 		getline(in, line);
-		if (i == 6)
-		{
-			getline(in, line);
-			getline(in, line);
-			getline(in, line);
-			getline(in, line);
-
-		}
 		int type = stoi(line.c_str());
 
 		if (type == 0)

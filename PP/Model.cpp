@@ -2,6 +2,7 @@
 
 int getHash(Transport transport)
 {
+
 	int sum = 0;
 	sum += transport.speed;
 	sum += transport.length;
@@ -25,54 +26,108 @@ int getHash(Transport transport)
 
 double getTravelTime(Transport transport)
 {
+	if (transport.speed == 0)
+	{
+		return INFINITY;
+	}
 	return static_cast<double>(transport.length) / static_cast<double>(transport.speed);
 }
 
 bool readFile(ifstream& infile, vector<Transport> hasharray[])
 {
+	if (!infile.is_open())
+	{
+		throw std::invalid_argument("Can not read from file!");
+	}
 
 	int count = 0;
 
 	string line;
 	getline(infile, line);
-	count = atoi(line.c_str());
+	count = stoi(line.c_str());
+
+	if (count < 0)
+	{
+		throw std::invalid_argument("Count of transport can not be negative!");
+	}
+
 	for (int i = 0; i < count; i++)
 	{
 		Transport* tempTransport = new Transport();
 
 
 		getline(infile, line);
-		tempTransport->type = atoi(line.c_str());
+		tempTransport->type = stoi(line.c_str());
+
+		if ((tempTransport->type < 0) || (tempTransport->type > 2))
+		{
+			throw std::invalid_argument("Unknown transport type!");
+		}
 
 		getline(infile, line);
-		tempTransport->speed = atoi(line.c_str());
+		tempTransport->speed = stoi(line.c_str());
+
+		if (tempTransport->speed < 0)
+		{
+			throw std::invalid_argument("Speed can not be negative!");
+		}
 
 		getline(infile, line);
-		tempTransport->length = atoi(line.c_str());
+		tempTransport->length = stoi(line.c_str());
+
+		if (tempTransport->length < 0)
+		{
+			throw std::invalid_argument("Length can not be negative!");
+		}
 
 		getline(infile, line);
-		tempTransport->cargoWeight = atof(line.c_str()); 
+		tempTransport->cargoWeight = stod(line.c_str()); 
+
+		if (tempTransport->cargoWeight < 0)
+		{
+			throw std::invalid_argument("Cargo weight can not be negative!");
+		}
 
 		if (tempTransport->type == PLANE)
 		{
 			getline(infile, line);
-			tempTransport->range = atoi(line.c_str());
+			tempTransport->range = stoi(line.c_str());
+			if (tempTransport->range < 0)
+			{
+				throw std::invalid_argument("Range can not be negative!");
+			}
 
 			getline(infile, line);
-			tempTransport->capacity = atoi(line.c_str());
+			tempTransport->capacity = stoi(line.c_str());
+			if (tempTransport->capacity < 0)
+			{
+				throw std::invalid_argument("Capacity can not be negative!");
+			}
 		}
 		else if (tempTransport->type == TRAIN)
 		{
 			getline(infile, line);
-			tempTransport->count = atoi(line.c_str());
+			tempTransport->count = stoi(line.c_str());
+			if (tempTransport->count < 0)
+			{
+				throw std::invalid_argument("Count can not be negative!");
+			}
 		}
 		else if (tempTransport->type == SHIP)
 		{
 			getline(infile, line);
-			tempTransport->displacement = atoi(line.c_str());
-
+			tempTransport->displacement = stoi(line.c_str());
+			if (tempTransport->displacement < 0)
+			{
+				throw std::invalid_argument("Displacement can not be negative!");
+			}
 			getline(infile, line);
-			tempTransport->shipType = static_cast<ShipType>(atoi(line.c_str()));
+			int value = stoi(line.c_str());
+			if ((value < 0) || (value > 2))
+			{
+				throw std::invalid_argument("Unknown ShipType!");
+			}
+			tempTransport->shipType = static_cast<ShipType>(value);
 		}
 
 		int index = getHash(*tempTransport);
@@ -85,6 +140,11 @@ bool readFile(ifstream& infile, vector<Transport> hasharray[])
 
 bool writeToFile(ofstream& outfile, vector<Transport> hasharray[])
 {
+	if (!outfile.is_open())
+	{
+		throw std::invalid_argument("Can not write to file!");
+	}
+
 	int count = 0;
 
 	for (int i = 0; i < MAXHASH; i++)
@@ -128,6 +188,11 @@ bool writeToFile(ofstream& outfile, vector<Transport> hasharray[])
 
 bool writeToFile(ofstream& outfile, vector<Transport> hasharray[], int missingType)
 {
+	if (!outfile.is_open())
+	{
+		throw std::invalid_argument("Can not write to file!");
+	}
+
 	int count = 0;
 
 	for (int i = 0; i < MAXHASH; i++)

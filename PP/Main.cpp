@@ -27,29 +27,37 @@ int main(int argc, char* argv[])
 	outputPath = argv[2];
 
 #endif
-	ifstream infile(inputPath);
-	if (!infile.is_open())
+	try
 	{
-		return 1;
-	}
+		ifstream infile(inputPath);
+		infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-	ofstream outfile(outputPath);
-	if (!outfile.is_open())
+
+		ofstream outfile(outputPath);
+
+		vector<Transport> hasharray[MAXHASH];
+
+		readFile(infile, hasharray);
+
+
+		sort(hasharray);
+
+		writeToFile(outfile, hasharray);
+
+		//result = writeToFile(outputPath, hasharray, TRAIN);
+	}
+	catch (std::invalid_argument & c)
 	{
-		return 1;
+		std::cerr << c.what();
 	}
-
-	vector<Transport> hasharray[MAXHASH];
-
-	readFile(infile, hasharray);
-
-
-	sort(hasharray);
-
-	writeToFile(outfile, hasharray);
-
-	//result = writeToFile(outputPath, hasharray, TRAIN);
-
+	catch (std::ifstream::failure e)
+	{
+		std::cerr << "Wrong input file";
+	}
+	catch (...)
+	{
+		std::cerr << "Exception :( ";
+	}
 	return 0;
 }
 

@@ -37,7 +37,7 @@ public:
 	
 };
 
-class Plane : public Transport //5
+class Plane : public Transport 
 {
 private:
 	int _range;
@@ -53,7 +53,7 @@ public:
 	void WriteTransportToFile(ofstream& out) override;
 };
 
-class Train : public Transport //4
+class Train : public Transport 
 {
 private:
 	int _count;
@@ -64,7 +64,7 @@ public:
 	void WriteTransportToFile(ofstream& out) override;
 };
 
-class Ship : public Transport //5
+class Ship : public Transport 
 {
 public:
 	enum ShipType
