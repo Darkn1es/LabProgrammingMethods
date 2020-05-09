@@ -10,7 +10,8 @@ using std::vector;
 using std::getline;
 using std::string;
 using std::endl;
-
+using std::stoi;
+using std::stod;
 
 class Transport
 {
@@ -36,7 +37,7 @@ public:
 	
 };
 
-class Plane : public Transport
+class Plane : public Transport //5
 {
 private:
 	int _range;
@@ -52,7 +53,7 @@ public:
 	void WriteTransportToFile(ofstream& out) override;
 };
 
-class Train : public Transport
+class Train : public Transport //4
 {
 private:
 	int _count;
@@ -63,7 +64,7 @@ public:
 	void WriteTransportToFile(ofstream& out) override;
 };
 
-class Ship : public Transport
+class Ship : public Transport //5
 {
 public:
 	enum ShipType

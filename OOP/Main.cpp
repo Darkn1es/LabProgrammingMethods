@@ -19,24 +19,30 @@ int main(int argc, char* argv[])
 	outputPath = argv[2];
 #endif
 
+	try
+	{
 	ifstream infile(inputPath);
-	if (!infile.is_open())
-	{
-		return 1;
-	}
+	infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
 	ofstream outfile(outputPath);
-	if (!outfile.is_open())
-	{
-		return 1;
-	}
 
 	HashArray* hashArray = new HashArray();
-
 	hashArray->ReadFile(infile);
 	hashArray->Sort();
 	hashArray->WriteFile(outfile);
-
 	//hashArray->WriteFile(outfile, typeid(Train));
-
+	}
+	catch (std::invalid_argument& c) 
+	{
+		std::cerr << c.what();
+	}
+	catch (std::ifstream::failure e) 
+	{
+		std::cerr << "Wrong input file";
+	}
+	catch (...)
+	{
+		std::cerr << "Exception :( ";
+	}
 	return 0;
 }
