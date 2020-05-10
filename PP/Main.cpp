@@ -10,53 +10,53 @@
 using namespace std;
 
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
 	string inputPath = "input.txt";
 	string outputPath = "output.txt";
 
 #if !DEBUG
 
-	if (argc != 3)
+	if ( argc != 3 )
 	{
 		cout << "Type input and output files\n";
 		return 1;
 	}
 
-	inputPath = argv[1];
-	outputPath = argv[2];
+	inputPath = argv[ 1 ];
+	outputPath = argv[ 2 ];
 
 #endif
 	try
 	{
-		ifstream infile(inputPath);
-		infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		ifstream infile( inputPath );
+		infile.exceptions( std::ifstream::failbit | std::ifstream::badbit );
 
 
-		ofstream outfile(outputPath);
+		ofstream outfile( outputPath );
 
-		vector<Transport> hasharray[MAXHASH];
+		vector<Transport> hasharray[ MAXHASH ];
 
-		readFile(infile, hasharray);
+		readFile( infile, hasharray );
 
 
-		sort(hasharray);
+		sort( hasharray );
 
-		writeToFile(outfile, hasharray);
+		writeToFile( outfile, hasharray );
 
 		//result = writeToFile(outputPath, hasharray, TRAIN);
 	}
-	catch (std::invalid_argument & c)
+	catch ( invalid_argument& c )
 	{
-		std::cerr << c.what();
+		cerr << c.what();
 	}
-	catch (std::ifstream::failure e)
+	catch ( std::ifstream::failure e )
 	{
-		std::cerr << "Wrong input file";
+		cerr << "Wrong input file";
 	}
-	catch (...)
+	catch ( ... )
 	{
-		std::cerr << "Exception :( ";
+		cerr << "Exception :( ";
 	}
 	return 0;
 }

@@ -38,7 +38,7 @@ namespace PPUnitTests
 
 		TEST_METHOD(ShipTypeToStringTest)
 		{
-			Assert::IsTrue("TOW" == shipTypeToString(ShipType::TOW));
+			Assert::IsTrue("TOW" == convertShipToString(ShipType::TOW));
 		}
 
 		TEST_METHOD(CompareTest)

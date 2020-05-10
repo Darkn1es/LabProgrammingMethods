@@ -9,9 +9,9 @@ const int MAXHASH = 32;
 
 enum TransportEnum
 {
-	PLANE = 0,
-	TRAIN = 1,
-	SHIP = 2
+	PLANE,
+	TRAIN,
+	SHIP
 };
 
 enum ShipType
@@ -42,17 +42,17 @@ struct Transport
 
 };
 
-int getHash(Transport transport);
-double getTravelTime(Transport transport);
+int getHash( Transport transport );
+double getTravelTime( Transport transport );
 
-bool readFile(ifstream& infile, vector<Transport> hasharray[]);
-bool writeToFile(ofstream& outfile, vector<Transport> hasharray[]);
-bool writeToFile(ofstream& outfile, vector<Transport> hasharray[], int missingType);
+bool readFile( ifstream& infile, vector<Transport> hasharray[] );
+bool writeToFile( ofstream& outfile, vector<Transport> hasharray[] );
+bool writeToFile( ofstream& outfile, vector<Transport> hasharray[], int missingType );
 
 
-string shipTypeToString(ShipType value);
+string convertShipToString( ShipType value );
 
-bool compare(Transport& a, Transport& b);
-void sort(vector<Transport> array[]);
+bool compare( Transport& a, Transport& b );
+void sort( vector<Transport> array[] );
 
 

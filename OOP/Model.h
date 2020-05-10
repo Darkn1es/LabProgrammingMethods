@@ -20,51 +20,51 @@ private:
 	int _length;
 	double _cargoWeight;
 public:
-	virtual void ReadTransportFromFile(ifstream& in);
-	virtual void WriteTransportToFile(ofstream& out);
+	virtual void ReadTransportFromFile( ifstream& in );
+	virtual void WriteTransportToFile( ofstream& out );
 	int GetSpeed();
-	void SetSpeed(int value);
+	void SetSpeed( int value );
 
 	int GetLength();
-	void SetLength(int value);
+	void SetLength( int value );
 
 	double GetCargoWeight();
-	void SetCargoWeight(double value);
+	void SetCargoWeight( double value );
 
 	double GetTravelTime();
 
-	bool Compare(Transport* value);
-	
+	bool Compare( Transport* value );
+
 };
 
-class Plane : public Transport 
+class Plane : public Transport
 {
 private:
 	int _range;
 	int _capacity;
 public:
 	int GetRange();
-	void SetRange(int value);
+	void SetRange( int value );
 
 	int GetCapacity();
-	void SetCapacity(int value);
+	void SetCapacity( int value );
 
-	void ReadTransportFromFile(ifstream& in) override;
-	void WriteTransportToFile(ofstream& out) override;
+	void ReadTransportFromFile( ifstream& in ) override;
+	void WriteTransportToFile( ofstream& out ) override;
 };
 
-class Train : public Transport 
+class Train : public Transport
 {
 private:
 	int _count;
 public:
 	int GetCount();
-	void SetCount(int value);
-	void ReadTransportFromFile(ifstream& in) override;
-	void WriteTransportToFile(ofstream& out) override;
+	void SetCount( int value );
+	void ReadTransportFromFile( ifstream& in ) override;
+	void WriteTransportToFile( ofstream& out ) override;
 };
 
-class Ship : public Transport 
+class Ship : public Transport
 {
 public:
 	enum ShipType
@@ -75,32 +75,32 @@ public:
 	};
 
 	int GetDisplacement();
-	void SetDisplacement(int value);
+	void SetDisplacement( int value );
 
 	ShipType GetShipType();
-	void SetShipType(ShipType value);
+	void SetShipType( ShipType value );
 
-	void ReadTransportFromFile(ifstream& in) override;
-	void WriteTransportToFile(ofstream& out) override;
+	void ReadTransportFromFile( ifstream& in ) override;
+	void WriteTransportToFile( ofstream& out ) override;
 
 private:
 	int _displacement;
 	ShipType _shipType;
-	string shipTypeToString(ShipType value);
+	string convertShipToString( ShipType value );
 };
 
 
 class HashArray
 {
 private:
-	int getHash(Transport* transport);
+	int getHash( Transport* transport );
 public:
 	vector<Transport*>* Conteiner;
 
 	const int MAXHASH = 32;
-	bool ReadFile(ifstream& in);
-	bool WriteFile(ofstream& out);
-	bool WriteFile(ofstream& out, const type_info& missingType);
+	bool ReadFile( ifstream& in );
+	bool WriteFile( ofstream& out );
+	bool WriteFile( ofstream& out, const type_info& missingType );
 
 	void Sort();
 

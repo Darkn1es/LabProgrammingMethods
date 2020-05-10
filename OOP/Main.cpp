@@ -4,43 +4,43 @@
 using std::cout;
 
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
 	string inputPath = "input.txt";
 	string outputPath = "output.txt";
 
 #if !DEBUG
-	if (argc != 3)
+	if ( argc != 3 )
 	{
 		cout << "Type input and output files\n";
 		return 1;
 	}
-	inputPath = argv[1];
-	outputPath = argv[2];
+	inputPath = argv[ 1 ];
+	outputPath = argv[ 2 ];
 #endif
 
 	try
 	{
-	ifstream infile(inputPath);
-	infile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		ifstream infile( inputPath );
+		infile.exceptions( std::ifstream::failbit | std::ifstream::badbit );
 
-	ofstream outfile(outputPath);
+		ofstream outfile( outputPath );
 
-	HashArray* hashArray = new HashArray();
-	hashArray->ReadFile(infile);
-	hashArray->Sort();
-	hashArray->WriteFile(outfile);
-	//hashArray->WriteFile(outfile, typeid(Train));
+		HashArray* hashArray = new HashArray();
+		hashArray->ReadFile( infile );
+		hashArray->Sort();
+		hashArray->WriteFile( outfile );
+		//hashArray->WriteFile(outfile, typeid(Train));
 	}
-	catch (std::invalid_argument& c) 
+	catch ( std::invalid_argument& c )
 	{
 		std::cerr << c.what();
 	}
-	catch (std::ifstream::failure e) 
+	catch ( std::ifstream::failure e )
 	{
 		std::cerr << "Wrong input file";
 	}
-	catch (...)
+	catch ( ... )
 	{
 		std::cerr << "Exception :( ";
 	}

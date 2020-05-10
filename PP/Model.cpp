@@ -1,22 +1,22 @@
 #include "Model.h"
 
-int getHash(Transport transport)
+int getHash( Transport transport )
 {
 
 	int sum = 0;
 	sum += transport.speed;
 	sum += transport.length;
 
-	if (transport.type == PLANE)
+	if ( transport.type == PLANE )
 	{
 		sum += transport.range;
 		sum += transport.capacity;
 	}
-	else if (transport.type == TRAIN)
+	else if ( transport.type == TRAIN )
 	{
 		sum += transport.count;
 	}
-	else if (transport.type == SHIP)
+	else if ( transport.type == SHIP )
 	{
 		sum += transport.displacement;
 	}
@@ -24,159 +24,159 @@ int getHash(Transport transport)
 	return sum % MAXHASH;
 }
 
-double getTravelTime(Transport transport)
+double getTravelTime( Transport transport )
 {
-	if (transport.speed == 0)
+	if ( transport.speed == 0 )
 	{
 		return INFINITY;
 	}
-	return static_cast<double>(transport.length) / static_cast<double>(transport.speed);
+	return static_cast<double>( transport.length ) / static_cast<double>( transport.speed );
 }
 
-bool readFile(ifstream& infile, vector<Transport> hasharray[])
+bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 {
-	if (!infile.is_open())
+	if ( !infile.is_open() )
 	{
-		throw std::invalid_argument("Can not read from file!");
+		throw std::invalid_argument( "Can not read from file!" );
 	}
 
 	int count = 0;
 
 	string line;
-	getline(infile, line);
-	count = stoi(line.c_str());
+	getline( infile, line );
+	count = stoi( line.c_str() );
 
-	if (count < 0)
+	if ( count < 0 )
 	{
-		throw std::invalid_argument("Count of transport can not be negative!");
+		throw std::invalid_argument( "Count of transport can not be negative!" );
 	}
 
-	for (int i = 0; i < count; i++)
+	for ( int i = 0; i < count; i++ )
 	{
 		Transport* tempTransport = new Transport();
 
 
-		getline(infile, line);
-		tempTransport->type = stoi(line.c_str());
+		getline( infile, line );
+		tempTransport->type = stoi( line.c_str() );
 
-		if ((tempTransport->type < 0) || (tempTransport->type > 2))
+		if ( ( tempTransport->type < 0 ) || ( tempTransport->type > 2 ) )
 		{
-			throw std::invalid_argument("Unknown transport type!");
+			throw std::invalid_argument( "Unknown transport type!" );
 		}
 
-		getline(infile, line);
-		tempTransport->speed = stoi(line.c_str());
+		getline( infile, line );
+		tempTransport->speed = stoi( line.c_str() );
 
-		if (tempTransport->speed < 0)
+		if ( tempTransport->speed < 0 )
 		{
-			throw std::invalid_argument("Speed can not be negative!");
+			throw std::invalid_argument( "Speed can not be negative!" );
 		}
 
-		getline(infile, line);
-		tempTransport->length = stoi(line.c_str());
+		getline( infile, line );
+		tempTransport->length = stoi( line.c_str() );
 
-		if (tempTransport->length < 0)
+		if ( tempTransport->length < 0 )
 		{
-			throw std::invalid_argument("Length can not be negative!");
+			throw std::invalid_argument( "Length can not be negative!" );
 		}
 
-		getline(infile, line);
-		tempTransport->cargoWeight = stod(line.c_str()); 
+		getline( infile, line );
+		tempTransport->cargoWeight = stod( line.c_str() );
 
-		if (tempTransport->cargoWeight < 0)
+		if ( tempTransport->cargoWeight < 0 )
 		{
-			throw std::invalid_argument("Cargo weight can not be negative!");
+			throw std::invalid_argument( "Cargo weight can not be negative!" );
 		}
 
-		if (tempTransport->type == PLANE)
+		if ( tempTransport->type == PLANE )
 		{
-			getline(infile, line);
-			tempTransport->range = stoi(line.c_str());
-			if (tempTransport->range < 0)
+			getline( infile, line );
+			tempTransport->range = stoi( line.c_str() );
+			if ( tempTransport->range < 0 )
 			{
-				throw std::invalid_argument("Range can not be negative!");
+				throw std::invalid_argument( "Range can not be negative!" );
 			}
 
-			getline(infile, line);
-			tempTransport->capacity = stoi(line.c_str());
-			if (tempTransport->capacity < 0)
+			getline( infile, line );
+			tempTransport->capacity = stoi( line.c_str() );
+			if ( tempTransport->capacity < 0 )
 			{
-				throw std::invalid_argument("Capacity can not be negative!");
+				throw std::invalid_argument( "Capacity can not be negative!" );
 			}
 		}
-		else if (tempTransport->type == TRAIN)
+		else if ( tempTransport->type == TRAIN )
 		{
-			getline(infile, line);
-			tempTransport->count = stoi(line.c_str());
-			if (tempTransport->count < 0)
+			getline( infile, line );
+			tempTransport->count = stoi( line.c_str() );
+			if ( tempTransport->count < 0 )
 			{
-				throw std::invalid_argument("Count can not be negative!");
+				throw std::invalid_argument( "Count can not be negative!" );
 			}
 		}
-		else if (tempTransport->type == SHIP)
+		else if ( tempTransport->type == SHIP )
 		{
-			getline(infile, line);
-			tempTransport->displacement = stoi(line.c_str());
-			if (tempTransport->displacement < 0)
+			getline( infile, line );
+			tempTransport->displacement = stoi( line.c_str() );
+			if ( tempTransport->displacement < 0 )
 			{
-				throw std::invalid_argument("Displacement can not be negative!");
+				throw std::invalid_argument( "Displacement can not be negative!" );
 			}
-			getline(infile, line);
-			int value = stoi(line.c_str());
-			if ((value < 0) || (value > 2))
+			getline( infile, line );
+			int value = stoi( line.c_str() );
+			if ( ( value < 0 ) || ( value > 2 ) )
 			{
-				throw std::invalid_argument("Unknown ShipType!");
+				throw std::invalid_argument( "Unknown ShipType!" );
 			}
-			tempTransport->shipType = static_cast<ShipType>(value);
+			tempTransport->shipType = static_cast<ShipType>( value );
 		}
 
-		int index = getHash(*tempTransport);
-		hasharray[index].push_back(*tempTransport);
+		int index = getHash( *tempTransport );
+		hasharray[ index ].push_back( *tempTransport );
 		delete tempTransport;
 	}
 	infile.close();
 	return true;
 }
 
-bool writeToFile(ofstream& outfile, vector<Transport> hasharray[])
+bool writeToFile( ofstream& outfile, vector<Transport> hasharray[] )
 {
-	if (!outfile.is_open())
+	if ( !outfile.is_open() )
 	{
-		throw std::invalid_argument("Can not write to file!");
+		throw std::invalid_argument( "Can not write to file!" );
 	}
 
 	int count = 0;
 
-	for (int i = 0; i < MAXHASH; i++)
+	for ( int i = 0; i < MAXHASH; i++ )
 	{
-		for (int j = 0; j < (int)hasharray[i].size(); j++)
+		for ( int j = 0; j < (int) hasharray[ i ].size(); j++ )
 		{
-			Transport current = hasharray[i][j];
-			if (current.type == PLANE)
+			Transport current = hasharray[ i ][ j ];
+			if ( current.type == PLANE )
 			{
 				outfile << "Type of transport: PLANE\n";
 				outfile << "Max capacity is " << current.capacity << endl;
 				outfile << "Max range is " << current.range << endl;
 			}
-			else if (current.type == TRAIN)
+			else if ( current.type == TRAIN )
 			{
 				outfile << "Type of transport: TRAIN\n";
 				outfile << "Count of train car is " << current.count << endl;
 			}
-			else if (current.type == SHIP)
+			else if ( current.type == SHIP )
 			{
 				outfile << "Type of transport: SHIP\n";
 				outfile << "Displacement is " << current.displacement << endl;
-				outfile << "Type of ship is " << shipTypeToString(current.shipType) << endl;
+				outfile << "Type of ship is " << convertShipToString( current.shipType ) << endl;
 			}
 			outfile << "Distance is " << current.length << endl;
 			outfile << "Max speed is " << current.speed << endl;
 			outfile << "Cargo weight is " << current.cargoWeight << endl;
 
-			outfile << "Travel time is " << getTravelTime(current) << endl;
+			outfile << "Travel time is " << getTravelTime( current ) << endl;
 			outfile << endl;
 		}
-		count += (int)hasharray[i].size();
+		count += (int) hasharray[ i ].size();
 	}
 
 	outfile << "There are " << count << " transports" << endl;
@@ -186,50 +186,50 @@ bool writeToFile(ofstream& outfile, vector<Transport> hasharray[])
 	return true;
 }
 
-bool writeToFile(ofstream& outfile, vector<Transport> hasharray[], int missingType)
+bool writeToFile( ofstream& outfile, vector<Transport> hasharray[], int missingType )
 {
-	if (!outfile.is_open())
+	if ( !outfile.is_open() )
 	{
-		throw std::invalid_argument("Can not write to file!");
+		throw std::invalid_argument( "Can not write to file!" );
 	}
 
 	int count = 0;
 
-	for (int i = 0; i < MAXHASH; i++)
+	for ( int i = 0; i < MAXHASH; i++ )
 	{
-		for (int j = 0; j < (int)hasharray[i].size(); j++)
+		for ( int j = 0; j < (int) hasharray[ i ].size(); j++ )
 		{
-			Transport current = hasharray[i][j];
-			if (current.type == missingType)
+			Transport current = hasharray[ i ][ j ];
+			if ( current.type == missingType )
 			{
 				count--;
 				continue;
 			}
-			if (current.type == PLANE)
+			if ( current.type == PLANE )
 			{
 				outfile << "Type of transport: PLANE\n";
 				outfile << "Max capacity is " << current.capacity << endl;
 				outfile << "Max range is " << current.range << endl;
 			}
-			else if (current.type == TRAIN)
+			else if ( current.type == TRAIN )
 			{
 				outfile << "Type of transport: TRAIN\n";
 				outfile << "Count of train car is " << current.count << endl;
 			}
-			else if (current.type == SHIP)
+			else if ( current.type == SHIP )
 			{
 				outfile << "Type of transport: SHIP\n";
 				outfile << "Displacement is " << current.displacement << endl;
-				outfile << "Type of ship is " << shipTypeToString(current.shipType) << endl;
+				outfile << "Type of ship is " << convertShipToString( current.shipType ) << endl;
 			}
 			outfile << "Distance is " << current.length << endl;
 			outfile << "Max speed is " << current.speed << endl;
 			outfile << "Cargo weight is " << current.cargoWeight << endl;
 
-			outfile << "Travel time is " << getTravelTime(current) << endl;
+			outfile << "Travel time is " << getTravelTime( current ) << endl;
 			outfile << endl;
 		}
-		count += (int)hasharray[i].size();
+		count += (int) hasharray[ i ].size();
 	}
 
 	outfile << "There are " << count << " transports" << endl;
@@ -239,46 +239,46 @@ bool writeToFile(ofstream& outfile, vector<Transport> hasharray[], int missingTy
 	return true;
 }
 
-string shipTypeToString(ShipType value)
+string convertShipToString( ShipType value )
 {
 	string result = "";
-	switch (value)
+	switch ( value )
 	{
-	case LINER:
-		result = "LINER";
-		break;
-	case TOW:
-		result = "TOW";
-		break;
-	case TANKER:
-		result = "TANKER";
-		break;
-	default:
-		break;
+		case LINER:
+			result = "LINER";
+			break;
+		case TOW:
+			result = "TOW";
+			break;
+		case TANKER:
+			result = "TANKER";
+			break;
+		default:
+			break;
 	}
 	return result;
 }
 
-bool compare(Transport& a, Transport& b)
+bool compare( Transport& a, Transport& b )
 {
-	return getTravelTime(a) > getTravelTime(b);
+	return getTravelTime( a ) > getTravelTime( b );
 }
 
-void sort(vector<Transport> array[])
+void sort( vector<Transport> array[] )
 {
-	for (int hashIndex = 0; hashIndex < MAXHASH; hashIndex++)
+	for ( int hashIndex = 0; hashIndex < MAXHASH; hashIndex++ )
 	{
 		// Bubble sort
-		int size = array[hashIndex].size();
-		for (int i = 0; i < (size - 1); i++)
+		int size = array[ hashIndex ].size();
+		for ( int i = 0; i < ( size - 1 ); i++ )
 		{
-			for (int j = 0; j < (size - i - 1); j++)
+			for ( int j = 0; j < ( size - i - 1 ); j++ )
 			{
-				if (compare(array[hashIndex][j], array[hashIndex][j + 1]))
+				if ( compare( array[ hashIndex ][ j ], array[ hashIndex ][ j + 1 ] ) )
 				{
-					Transport temp = array[hashIndex][j];
-					array[hashIndex][j] = array[hashIndex][j + 1];
-					array[hashIndex][j + 1] = temp;
+					Transport temp = array[ hashIndex ][ j ];
+					array[ hashIndex ][ j ] = array[ hashIndex ][ j + 1 ];
+					array[ hashIndex ][ j + 1 ] = temp;
 				}
 			}
 		}
