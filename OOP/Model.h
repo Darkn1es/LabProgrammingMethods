@@ -35,6 +35,12 @@ public:
 
 	bool Compare( Transport* value );
 
+	virtual void MultiMethod( Transport* other, ofstream& out );
+
+	virtual void MMPlane( ofstream& out );
+	virtual void MMTrain( ofstream& out );
+	virtual void MMShip( ofstream& out );
+
 };
 
 class Plane : public Transport
@@ -51,6 +57,12 @@ public:
 
 	void ReadTransportFromFile( ifstream& in ) override;
 	void WriteTransportToFile( ofstream& out ) override;
+
+	void MultiMethod( Transport* other, ofstream& out ) override;
+
+	void MMPlane( ofstream& out ) override;
+	void MMTrain( ofstream& out ) override;
+	void MMShip( ofstream& out ) override;
 };
 
 class Train : public Transport
@@ -62,6 +74,12 @@ public:
 	void SetCount( int value );
 	void ReadTransportFromFile( ifstream& in ) override;
 	void WriteTransportToFile( ofstream& out ) override;
+
+	void MultiMethod( Transport* other, ofstream& out ) override;
+
+	void MMPlane( ofstream& out ) override;
+	void MMTrain( ofstream& out ) override;
+	void MMShip( ofstream& out ) override;
 };
 
 class Ship : public Transport
@@ -83,6 +101,12 @@ public:
 	void ReadTransportFromFile( ifstream& in ) override;
 	void WriteTransportToFile( ofstream& out ) override;
 
+	void MultiMethod( Transport* other, ofstream& out ) override;
+
+	void MMPlane( ofstream& out ) override;
+	void MMTrain( ofstream& out ) override;
+	void MMShip( ofstream& out ) override;
+
 private:
 	int _displacement;
 	ShipType _shipType;
@@ -103,6 +127,8 @@ public:
 	bool WriteFile( ofstream& out, const type_info& missingType );
 
 	void Sort();
+
+	void MultiMethod( ofstream& out );
 
 	HashArray();
 	~HashArray();

@@ -5,7 +5,7 @@
 #include <fstream>
 #include "Model.h"
 
-#define DEBUG false;
+#define DEBUG 1;
 
 using namespace std;
 
@@ -45,6 +45,10 @@ int main( int argc, char* argv[] )
 		writeToFile( outfile, hasharray );
 
 		//result = writeToFile(outputPath, hasharray, TRAIN);
+		multiMethod( hasharray, outfile );
+
+		infile.close();
+		outfile.close();
 	}
 	catch ( invalid_argument& c )
 	{

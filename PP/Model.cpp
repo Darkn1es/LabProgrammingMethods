@@ -134,7 +134,6 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		hasharray[ index ].push_back( *tempTransport );
 		delete tempTransport;
 	}
-	infile.close();
 	return true;
 }
 
@@ -182,7 +181,6 @@ bool writeToFile( ofstream& outfile, vector<Transport> hasharray[] )
 	outfile << "There are " << count << " transports" << endl;
 
 
-	outfile.close();
 	return true;
 }
 
@@ -235,7 +233,6 @@ bool writeToFile( ofstream& outfile, vector<Transport> hasharray[], int missingT
 	outfile << "There are " << count << " transports" << endl;
 
 
-	outfile.close();
 	return true;
 }
 
@@ -283,6 +280,89 @@ void sort( vector<Transport> array[] )
 			}
 		}
 
+	}
+}
+
+void multiMethod( vector<Transport> hasharray[], ofstream& outfile )
+{
+	outfile << "Multimethod result" << endl;
+	vector<Transport> list;
+	// Join all vectors
+	for ( int i = 0; i < MAXHASH; i++ )
+	{
+		if ( hasharray[ i ].size() == 0 )
+		{
+			continue;
+		}
+		list.insert( list.end(), hasharray[ i ].begin(), hasharray[ i ].end() );
+	}
+
+	for ( int i = 0; i < list.size() - 1; i++ )
+	{
+		int k1 = list[ i ].type;
+
+		for ( int j = i + 1; j < list.size(); j++ )
+		{
+			int k2 = list[ j ].type;
+
+			switch ( k1 )
+			{
+				case PLANE:
+					switch ( k2 )
+					{
+						case PLANE:
+							outfile << "PLANE and PLANE" << endl;
+							break;
+						case TRAIN:
+							outfile << "PLANE and TRAIN" << endl;
+							break;
+						case SHIP:
+							outfile << "PLANE and SHIP" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+					break;
+				case TRAIN:
+					switch ( k2 )
+					{
+						case PLANE:
+							outfile << "TRAIN and PLANE" << endl;
+							break;
+						case TRAIN:
+							outfile << "TRAIN and TRAIN" << endl;
+							break;
+						case SHIP:
+							outfile << "TRAIN and SHIP" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+					break;
+				case SHIP:
+					switch ( k2 )
+					{
+						case PLANE:
+							outfile << "SHIP and PLANE" << endl;
+							break;
+						case TRAIN:
+							outfile << "SHIP and TRAIN" << endl;
+							break;
+						case SHIP:
+							outfile << "SHIP and SHIP" << endl;
+							break;
+						default:
+							outfile << "Unknown type" << endl;
+							break;
+					}
+					break;
+				default:
+					outfile << "Unknown type" << endl;
+					break;
+			}
+		}
 	}
 }
 

@@ -55,4 +55,6 @@ string convertShipToString( ShipType value );
 bool compare( Transport& a, Transport& b );
 void sort( vector<Transport> array[] );
 
+void multiMethod( vector<Transport> hasharray[], ofstream& outfile );
+
 

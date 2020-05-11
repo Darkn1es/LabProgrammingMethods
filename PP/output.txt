@@ -45,3 +45,19 @@ Cargo weight is 1.25
 Travel time is 1.5
 
 There are 6 transports
+Multimethod result
+PLANE and PLANE
+PLANE and SHIP
+PLANE and TRAIN
+PLANE and TRAIN
+PLANE and SHIP
+PLANE and SHIP
+PLANE and TRAIN
+PLANE and TRAIN
+PLANE and SHIP
+SHIP and TRAIN
+SHIP and TRAIN
+SHIP and SHIP
+TRAIN and TRAIN
+TRAIN and SHIP
+TRAIN and SHIP

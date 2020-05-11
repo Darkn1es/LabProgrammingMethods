@@ -1,5 +1,5 @@
 ﻿#include "Model.h"
-#define DEBUG false;
+#define DEBUG 1;
 
 using std::cout;
 
@@ -31,6 +31,9 @@ int main( int argc, char* argv[] )
 		hashArray->Sort();
 		hashArray->WriteFile( outfile );
 		//hashArray->WriteFile(outfile, typeid(Train));
+		hashArray->MultiMethod( outfile );
+		infile.close();
+		outfile.close();
 	}
 	catch ( std::invalid_argument& c )
 	{
