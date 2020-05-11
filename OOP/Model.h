@@ -54,7 +54,6 @@ public:
 
 	void MultiMethod( Transport* other, ofstream& out );
 
-protected:
 	void MMPlane( ofstream& out );
 	void MMTrain( ofstream& out );
 };
@@ -71,7 +70,6 @@ public:
 
 	void MultiMethod( Transport* other, ofstream& out );
 
-protected:
 	void MMPlane( ofstream& out );
 	void MMTrain( ofstream& out );
 };
