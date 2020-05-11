@@ -40,6 +40,21 @@ void Transport::SetLength(int value)
 	_length = value;
 }
 
+void Transport::MultiMethod( Transport* other, ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
+void Transport::MMPlane( ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
+void Transport::MMTrain( ofstream& out )
+{
+	out << "Unknown transport" << endl;
+}
+
 #pragma endregion
 
 #pragma region Plane
@@ -86,6 +101,21 @@ void Plane::WriteTransportToFile(ofstream& out)
 
 }
 
+void Plane::MultiMethod( Transport* other, ofstream& out )
+{
+	other->MMPlane( out );
+}
+
+void Plane::MMPlane( ofstream& out )
+{
+	out << "PLANE and PLANE" << endl;
+}
+
+void Plane::MMTrain( ofstream& out )
+{
+	out << "TRAIN and PLANE" << endl;
+}
+
 #pragma endregion
 
 #pragma region Train
@@ -113,6 +143,21 @@ void Train::WriteTransportToFile(ofstream& out)
 	out << "Count of train car is " << _count << endl;
 
 	Transport::WriteTransportToFile(out);
+}
+
+void Train::MultiMethod( Transport* other, ofstream& out )
+{
+	other->MMTrain( out );
+}
+
+void Train::MMPlane( ofstream& out )
+{
+	out << "PLANE and TRAIN" << endl;
+}
+
+void Train::MMTrain( ofstream& out )
+{
+	out << "TRAIN and TRAIN" << endl;
 }
 
 #pragma endregion
@@ -197,6 +242,29 @@ bool HashArray::WriteFile(ofstream& out)
 	out << "There are " << count << " transports" << endl;
 
 	return false;
+}
+
+void HashArray::MultiMethod( ofstream& out )
+{
+	out << "Multimethod result" << endl;
+	vector<Transport*> list;
+	// Join all vectors
+	for ( int i = 0; i < MAXHASH; i++ )
+	{
+		if ( Conteiner[ i ].size() == 0 )
+		{
+			continue;
+		}
+		list.insert( list.end(), Conteiner[ i ].begin(), Conteiner[ i ].end() );
+	}
+
+	for ( int i = 0; i < list.size() - 1; i++ )
+	{
+		for ( int j = i + 1; j < list.size(); j++ )
+		{
+			list[ i ]->MultiMethod( list[ j ], out );
+		}
+	}
 }
 
 

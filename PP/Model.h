@@ -30,8 +30,9 @@ struct Transport
 
 };
 
-int getHash(Transport transport);
+int getHash( Transport transport );
 
-bool readFile(string input, vector<Transport> hasharray[]);
-bool writeToFile(string output, vector<Transport> hasharray[]);
+bool readFile( ifstream& infile, vector<Transport> hasharray[] );
+bool writeToFile( ofstream& outfile, vector<Transport> hasharray[] );
 
+void multiMethod( vector<Transport> hasharray[], ofstream& outfile );

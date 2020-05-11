@@ -20,13 +20,21 @@ private:
 public:
 	virtual void ReadTransportFromFile(ifstream& in);
 	virtual void WriteTransportToFile(ofstream& out);
+
 	int GetSpeed();
 	void SetSpeed(int value);
 
 	int GetLength();
 	void SetLength(int value);
 
-	
+	// MultiMethods
+	virtual void MultiMethod( Transport* other, ofstream& out );
+
+	virtual void MMPlane( ofstream& out );
+	virtual void MMTrain( ofstream& out );
+
+
+
 };
 
 class Plane : public Transport
@@ -43,6 +51,12 @@ public:
 
 	void ReadTransportFromFile(ifstream& in) override;
 	void WriteTransportToFile(ofstream& out) override;
+
+	void MultiMethod( Transport* other, ofstream& out );
+
+protected:
+	void MMPlane( ofstream& out );
+	void MMTrain( ofstream& out );
 };
 
 class Train : public Transport
@@ -54,6 +68,12 @@ public:
 	void SetCount(int value);
 	void ReadTransportFromFile(ifstream& in) override;
 	void WriteTransportToFile(ofstream& out) override;
+
+	void MultiMethod( Transport* other, ofstream& out );
+
+protected:
+	void MMPlane( ofstream& out );
+	void MMTrain( ofstream& out );
 };
 
 
@@ -68,6 +88,7 @@ public:
 	bool ReadFile(ifstream& in);
 	bool WriteFile(ofstream& out);
 
+	void MultiMethod( ofstream& out );
 
 	HashArray();
 	~HashArray();

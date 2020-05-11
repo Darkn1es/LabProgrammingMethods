@@ -16,3 +16,7 @@ Distance is  6
 Max speed is  5
 
 There are 3 transports
+Multimethod result
+PLANE and PLANE
+PLANE and TRAIN
+PLANE and TRAIN
