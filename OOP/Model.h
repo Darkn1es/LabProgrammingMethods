@@ -52,10 +52,10 @@ public:
 	void ReadTransportFromFile(ifstream& in) override;
 	void WriteTransportToFile(ofstream& out) override;
 
-	void MultiMethod( Transport* other, ofstream& out );
+	void MultiMethod( Transport* other, ofstream& out ) override;
 
-	void MMPlane( ofstream& out );
-	void MMTrain( ofstream& out );
+	void MMPlane( ofstream& out ) override;
+	void MMTrain( ofstream& out ) override;
 };
 
 class Train : public Transport
@@ -68,10 +68,10 @@ public:
 	void ReadTransportFromFile(ifstream& in) override;
 	void WriteTransportToFile(ofstream& out) override;
 
-	void MultiMethod( Transport* other, ofstream& out );
+	void MultiMethod( Transport* other, ofstream& out ) override;
 
-	void MMPlane( ofstream& out );
-	void MMTrain( ofstream& out );
+	void MMPlane( ofstream& out ) override;
+	void MMTrain( ofstream& out ) override;
 };
 
 
