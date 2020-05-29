@@ -416,6 +416,10 @@ void HashArray::Sort()
 	{
 		// Bubble sort
 		size_t size = Conteiner[ hashIndex ].size();
+		if (size == 0)
+		{
+			continue;
+		}
 		for (size_t i = 0; i < ( size - 1 ); i++ )
 		{
 			for (size_t j = 0; j < ( size - i - 1 ); j++ )
