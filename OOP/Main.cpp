@@ -38,14 +38,17 @@ int main( int argc, char* argv[] )
 	catch ( std::invalid_argument& c )
 	{
 		std::cerr << c.what();
+		return 2;
 	}
 	catch ( std::ifstream::failure e )
 	{
 		std::cerr << "Wrong input file";
+		return 1;
 	}
 	catch ( ... )
 	{
 		std::cerr << "Exception :( ";
+		return 3;
 	}
 	return 0;
 }

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <array>
 
 using std::ifstream;
 using std::ofstream;
@@ -12,6 +13,7 @@ using std::string;
 using std::endl;
 using std::stoi;
 using std::stod;
+using std::size_t;
 
 class Transport
 {
@@ -119,9 +121,9 @@ class HashArray
 private:
 	int getHash( Transport* transport );
 public:
-	vector<Transport*>* Conteiner;
+	std::array< vector< Transport* >, 32 > Conteiner;
 
-	const int MAXHASH = 32;
+	const size_t MAXHASH = 32;
 	bool ReadFile( ifstream& in );
 	bool WriteFile( ofstream& out );
 	bool WriteFile( ofstream& out, const type_info& missingType );

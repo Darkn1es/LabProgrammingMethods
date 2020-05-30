@@ -53,14 +53,17 @@ int main( int argc, char* argv[] )
 	catch ( invalid_argument& c )
 	{
 		cerr << c.what();
+		return 2;
 	}
 	catch ( std::ifstream::failure e )
 	{
 		cerr << "Wrong input file";
+		return 1;
 	}
 	catch ( ... )
 	{
 		cerr << "Exception :( ";
+		return 3;
 	}
 	return 0;
 }

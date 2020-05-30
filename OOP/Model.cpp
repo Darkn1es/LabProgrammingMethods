@@ -11,13 +11,13 @@ void Transport::ReadTransportFromFile( ifstream& in )
 	string line;
 
 	getline( in, line );
-	SetSpeed( stoi( line.c_str() ) );
+	SetSpeed( stoi( line ) );
 
 	getline( in, line );
-	SetLength( stoi( line.c_str() ) );
+	SetLength( stoi( line ) );
 
 	getline( in, line );
-	SetCargoWeight( stod( line.c_str() ) );
+	SetCargoWeight( stod( line ) );
 
 }
 
@@ -164,10 +164,10 @@ void Plane::ReadTransportFromFile( ifstream& in )
 	string line;
 
 	getline( in, line );
-	SetRange( stoi( line.c_str() ) );
+	SetRange( stoi( line ) );
 
 	getline( in, line );
-	SetCapacity( stoi( line.c_str() ) );
+	SetCapacity( stoi( line ) );
 }
 
 void Plane::WriteTransportToFile( ofstream& out )
@@ -231,7 +231,7 @@ void Train::ReadTransportFromFile( ifstream& in )
 	string line;
 
 	getline( in, line );
-	SetCount( stoi( line.c_str() ) );
+	SetCount( stoi( line ) );
 }
 
 void Train::WriteTransportToFile( ofstream& out )
@@ -312,7 +312,7 @@ bool HashArray::ReadFile( ifstream& in )
 
 	string line;
 	getline( in, line );
-	count = stoi( line.c_str() );
+	count = stoi( line );
 	if ( count < 0 )
 	{
 		throw std::invalid_argument( "Count of transport can not be negative!" );
@@ -323,7 +323,7 @@ bool HashArray::ReadFile( ifstream& in )
 		Transport* tempTrasport = nullptr;
 
 		getline( in, line );
-		int type = stoi( line.c_str() );
+		int type = stoi( line );
 
 		if ( type == 0 )
 		{
@@ -363,16 +363,16 @@ bool HashArray::WriteFile( ofstream& out )
 		throw std::invalid_argument( "Can not write to file!" );
 	}
 
-	int count = 0;
+	size_t count = 0;
 
-	for ( int i = 0; i < MAXHASH; i++ )
+	for (size_t i = 0; i < MAXHASH; i++ )
 	{
-		for ( int j = 0; j < (int) Conteiner[ i ].size(); j++ )
+		for (size_t j = 0; j <  Conteiner[ i ].size(); j++ )
 		{
 			Transport* current = Conteiner[ i ][ j ];
 			current->WriteTransportToFile( out );
 		}
-		count += (int) Conteiner[ i ].size();
+		count += Conteiner[ i ].size();
 	}
 
 	out << "There are " << count << " transports" << endl;
@@ -387,11 +387,11 @@ bool HashArray::WriteFile( ofstream& out, const type_info& missingType )
 		throw std::invalid_argument( "Can not write to file!" );
 	}
 
-	int count = 0;
+	size_t count = 0;
 
-	for ( int i = 0; i < MAXHASH; i++ )
+	for (size_t i = 0; i < MAXHASH; i++ )
 	{
-		for ( int j = 0; j < (int) Conteiner[ i ].size(); j++ )
+		for (size_t j = 0; j <  Conteiner[ i ].size(); j++ )
 		{
 			Transport* current = Conteiner[ i ][ j ];
 			// Skip chosen type
@@ -402,7 +402,7 @@ bool HashArray::WriteFile( ofstream& out, const type_info& missingType )
 			}
 			current->WriteTransportToFile( out );
 		}
-		count += (int) Conteiner[ i ].size();
+		count +=  Conteiner[ i ].size();
 	}
 
 	out << "There are " << count << " transports" << endl;
@@ -412,13 +412,17 @@ bool HashArray::WriteFile( ofstream& out, const type_info& missingType )
 
 void HashArray::Sort()
 {
-	for ( int hashIndex = 0; hashIndex < MAXHASH; hashIndex++ )
+	for (size_t hashIndex = 0; hashIndex < MAXHASH; hashIndex++ )
 	{
 		// Bubble sort
-		int size = Conteiner[ hashIndex ].size();
-		for ( int i = 0; i < ( size - 1 ); i++ )
+		size_t size = Conteiner[ hashIndex ].size();
+		if (size == 0)
 		{
-			for ( int j = 0; j < ( size - i - 1 ); j++ )
+			continue;
+		}
+		for (size_t i = 0; i < ( size - 1 ); i++ )
+		{
+			for (size_t j = 0; j < ( size - i - 1 ); j++ )
 			{
 				if ( Conteiner[ hashIndex ][ j ]->Compare( Conteiner[ hashIndex ][ j + 1 ] ) )
 				{
@@ -437,7 +441,7 @@ void HashArray::MultiMethod( ofstream& out )
 	out << "Multimethod result" << endl;
 	vector<Transport*> list;
 	// Join all vectors
-	for ( int i = 0; i < MAXHASH; i++ )
+	for (size_t i = 0; i < MAXHASH; i++ )
 	{
 		if ( Conteiner[ i ].size() == 0 )
 		{
@@ -446,9 +450,9 @@ void HashArray::MultiMethod( ofstream& out )
 		list.insert( list.end(), Conteiner[ i ].begin(), Conteiner[ i ].end() );
 	}
 
-	for ( int i = 0; i < list.size() - 1; i++ )
+	for (size_t i = 0; i < list.size() - 1; i++ )
 	{
-		for ( int j = i + 1; j < list.size(); j++ )
+		for (size_t j = i + 1; j < list.size(); j++ )
 		{
 			list[ i ]->MultiMethod( list[ j ], out );
 		}
@@ -459,20 +463,18 @@ void HashArray::MultiMethod( ofstream& out )
 
 HashArray::HashArray()
 {
-	Conteiner = new vector<Transport*>[ MAXHASH ];
 
 }
 
 HashArray::~HashArray()
 {
-	for ( int i = 0; i < MAXHASH; i++ )
+	for ( size_t i = 0; i < MAXHASH; i++ )
 	{
-		for ( int j = 0; j < (int) Conteiner[ i ].size(); j++ )
+		for (size_t j = 0; j < Conteiner[ i ].size(); j++ )
 		{
 			delete Conteiner[ i ][ j ];
 		}
 	}
-	delete Conteiner;
 
 }
 
@@ -520,10 +522,10 @@ void Ship::ReadTransportFromFile( ifstream& in )
 	string line;
 
 	getline( in, line );
-	_displacement = stoi( line.c_str() );
+	_displacement = stoi( line );
 
 	getline( in, line );
-	_shipType = static_cast<ShipType>( stoi( line.c_str() ) );
+	_shipType = static_cast<ShipType>( stoi( line ) );
 
 }
 

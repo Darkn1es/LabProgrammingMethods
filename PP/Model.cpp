@@ -44,7 +44,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 
 	string line;
 	getline( infile, line );
-	count = stoi( line.c_str() );
+	count = stoi( line );
 
 	if ( count < 0 )
 	{
@@ -57,7 +57,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 
 
 		getline( infile, line );
-		tempTransport->type = stoi( line.c_str() );
+		tempTransport->type = stoi( line );
 
 		if ( ( tempTransport->type < 0 ) || ( tempTransport->type > 2 ) )
 		{
@@ -65,7 +65,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		}
 
 		getline( infile, line );
-		tempTransport->speed = stoi( line.c_str() );
+		tempTransport->speed = stoi( line );
 
 		if ( tempTransport->speed < 0 )
 		{
@@ -73,7 +73,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		}
 
 		getline( infile, line );
-		tempTransport->length = stoi( line.c_str() );
+		tempTransport->length = stoi( line );
 
 		if ( tempTransport->length < 0 )
 		{
@@ -81,7 +81,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		}
 
 		getline( infile, line );
-		tempTransport->cargoWeight = stod( line.c_str() );
+		tempTransport->cargoWeight = stod( line );
 
 		if ( tempTransport->cargoWeight < 0 )
 		{
@@ -91,14 +91,14 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		if ( tempTransport->type == PLANE )
 		{
 			getline( infile, line );
-			tempTransport->range = stoi( line.c_str() );
+			tempTransport->range = stoi( line );
 			if ( tempTransport->range < 0 )
 			{
 				throw std::invalid_argument( "Range can not be negative!" );
 			}
 
 			getline( infile, line );
-			tempTransport->capacity = stoi( line.c_str() );
+			tempTransport->capacity = stoi( line );
 			if ( tempTransport->capacity < 0 )
 			{
 				throw std::invalid_argument( "Capacity can not be negative!" );
@@ -107,7 +107,7 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		else if ( tempTransport->type == TRAIN )
 		{
 			getline( infile, line );
-			tempTransport->count = stoi( line.c_str() );
+			tempTransport->count = stoi( line );
 			if ( tempTransport->count < 0 )
 			{
 				throw std::invalid_argument( "Count can not be negative!" );
@@ -116,13 +116,13 @@ bool readFile( ifstream& infile, vector<Transport> hasharray[] )
 		else if ( tempTransport->type == SHIP )
 		{
 			getline( infile, line );
-			tempTransport->displacement = stoi( line.c_str() );
+			tempTransport->displacement = stoi( line );
 			if ( tempTransport->displacement < 0 )
 			{
 				throw std::invalid_argument( "Displacement can not be negative!" );
 			}
 			getline( infile, line );
-			int value = stoi( line.c_str() );
+			int value = stoi( line );
 			if ( ( value < 0 ) || ( value > 2 ) )
 			{
 				throw std::invalid_argument( "Unknown ShipType!" );
